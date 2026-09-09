@@ -2,11 +2,10 @@
 This is our code base for Spectral Priors vs Attention: Investigating the Utility of Attention Mechanisms in EEG-Based Diagnosis paper. All the pre-processing scripts, ML Baselines, KL Divergence, CRT Ablation, Conversion of Tensors, Transformer Models' data loading, data factory changes are uploaded to their respective folders.
 
 
-**Original Datasets:** [ADFTD](https://openneuro.org/datasets/ds004504/versions/1.0.6/), [APAVA](https://osf.io/jbysn/overview/), [TDBrain](https://brainclinics.com/resources/), [AMP-SCZ]
-https://nda.nih.gov/ampscz
+**Original Datasets:** [ADFTD](https://openneuro.org/datasets/ds004504/versions/1.0.6/), [APAVA](https://osf.io/jbysn/overview/), [TDBrain](https://brainclinics.com/resources/), [AMP-SCZ](https://nda.nih.gov/ampscz)
  
 
- Traverse to each dataset folder and run their spectral feature extraction (FFT DWT) script by downloading the original dataset folder and filtering subjects as mentioned in the paper. Upon Spectral Feature Computation, the stratified split generation script would generate the 5 splits with train-val-test subjects. Then passing the stratified_holdout_directory as the model param for LDA/RDA would start the train-test process of ML models. The data loader script for Transformer models **script:** `Transformer_Changes/data_provider/data_loader.py` has been modified for the AMP-SCZ and TDBrain class.
+Traverse to each dataset folder and run their spectral feature extraction (FFT DWT) script by downloading the original dataset folder and filtering subjects as mentioned in the paper. Upon Spectral Feature Computation, the stratified split generation script would generate the 5 splits with train-val-test subjects. Then passing the stratified_holdout_directory as the model param for LDA/RDA would start the train-test process of ML models. The data loader script for Transformer models **script:** `Transformer_Changes/data_provider/data_loader.py` has been modified for the AMP-SCZ and TDBrain class.
 
 We integrate [EEG-Conformer](https://github.com/eeyhsong/EEG-Conformer) model for our evaluation on the rest and task-EEG datasets along with Medformer and [Reformer](https://github.com/google/trax/tree/master/trax/models/reformer). AMP-SCZ Loader class and data dictionary is updated in the **script:** `Transformer_Changes/data_provider/data_factory.py.  For evaluating Conformer models' performances on the AMP-SCZ dataset, the following configuration was used:
 
