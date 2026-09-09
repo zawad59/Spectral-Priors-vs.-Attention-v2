@@ -1,46 +1,6 @@
 #!/usr/bin/env python3
 # SCZ_PreProcessing_ADFTD_aggregated.py
-#
-# AMP-SCZ raw BrainVision preprocessing adjusted to match the ADFTD/TDBrain
-# feature extraction style:
-#   - read raw EEG directly from .vhdr/.eeg/.vmrk BrainVision files
-#   - resample native_fs -> 256 Hz via LINEAR INTERPOLATION (matching
-#     TDBrain_fft_dwt.py's resampling(), NOT MNE's raw.resample())
-#   - pick EEG channels, average reference
-#   - segment into sliding-window epochs (default 4s, 2s stride -- 50%
-#     overlap), matching TDBrain/ADFTD's windowing scheme
-#   - demean each channel, per epoch
-#   - compute FFT relative band powers, DWT relative band energies, and
-#     spectral summary features PER EPOCH, then average across epochs
-#   - average multiple runs/files per subject when present
-#   - write one CSV row per SCZ subject, including n_epochs
-#   - print the n_epochs-per-subject distribution (mean/median/min/max/std)
-#
-# Expected AMP-SCZ layout from the provided snapshot:
-#   Eyes_Closed_visit1_only/
-#       BIO7844/
-#           visit_1/
-#               sub-BIO7844_ses-20230519_task-RestEC_run-01_eeg.vhdr
-#               sub-BIO7844_ses-20230519_task-RestEC_run-01_eeg.eeg
-#               sub-BIO7844_ses-20230519_task-RestEC_run-01_eeg.vmrk
-#
-# Example:
-#   python SCZ_PreProcessing_ADFTD_aggregated.py \
-#       --root "Z:/AMP_SCZ_R3/EEG3/EC_EEG_Separate/Eyes_Closed_visit1_only" \
-#       --out "AMP_SCZ_visit1_EC_ADFTD_aggregated_features.csv" \
-#       --win-sec 4.0 --stride-sec 2.0 \
-#       --label "Label/label.npy"
-#
-# --label (optional): path to a .npy file mapping subject IDs to their
-#   diagnostic label. Loaded with allow_pickle=True and accepted in any of
-#   these forms:
-#     - a dict-like object:            {"BIO7844": 1, "BIO7845": 0, ...}
-#     - a structured/record array with subject-id and label fields
-#       (matched by any field name containing "subj"/"id" for the id,
-#       and "label" for the label)
-#     - a plain 2-column array/list of [subj_id, label] pairs
-#   Matched subjects get a "label" column in the output CSV; subjects with
-#   no entry in label.npy get NaN there and are reported in a warning.
+# Calculation of Spectral Feat
 
 from __future__ import annotations
 
