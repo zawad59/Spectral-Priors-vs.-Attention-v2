@@ -1,43 +1,6 @@
 #!/usr/bin/env python3
 # tdbrain_parkinson_csv_to_feature_npy.py
-#
-# Converts combined EC (eyes-closed) resting-state CSV recordings
-# (e.g. sub-87974617_ses-1_task-restEC_eeg.csv) into per-subject
-# feature_{subj_ID}.npy files, using the EXACT preprocessing logic from
-# the Medformer TDBRAIN_preprocessing.ipynb notebook:
-#
-#   1. resampling(): per-channel linear interpolation from the recording's
-#      native rate (--src-fs, default 500 Hz) down to 256 Hz. Verbatim
-#      port of the notebook's `resampling()` function -- same
-#      np.linspace/interp1d formula, same rounding behavior.
-#   2. segment(): non-overlapping 256-sample windows, START FROM THE
-#      MIDDLE of the recording (not the beginning) and walk outward in
-#      both directions until a partial window would be needed. Verbatim
-#      port of the notebook's `segment()` function.
-#   3. Each subject's array is saved as (n_windows, 256, n_channels) --
-#      i.e. np.array(list_of_window_dataframes), matching the notebook's
-#      `array_sub = np.array(li_sub)` shape exactly.
-#
-# WHAT'S DIFFERENT FROM THE NOTEBOOK (because this dataset's folder
-# layout is already flattened to one combined CSV per subject, not
-# subject/session/task subfolders):
-#
-#   - The notebook loops root/<sub>/<ses>/eeg/<task>.csv, concatenating
-#     every EC file across sessions into one windows-list per subject,
-#     and numbers subjects 1..N in os.listdir() order (NOT matched to the
-#     real participant ID). Here, each CSV filename already encodes the
-#     real subj_ID (sub-87974617_...), and there is one EC file per
-#     subject, so no cross-session concatenation is needed.
-#   - Output filenames use the REAL subj_ID parsed from the CSV filename
-#     (feature_87974617.npy), matched against label.npy's subj_ID column
-#     directly -- NOT the notebook's sequential 1,2,3.. renumbering. This
-#     is a safer join than order-matching since it doesn't depend on
-#     folder listing order.
-#   - CSV reading, resampling math, and segmentation math are otherwise
-#     untouched from the notebook.
-#
-# A [VERIFY] preview is printed before processing -- check that every
-# label.npy subj_ID found its CSV file before trusting the output.
+
 
 from __future__ import annotations
 import os
