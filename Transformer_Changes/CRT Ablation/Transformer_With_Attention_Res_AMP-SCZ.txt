@@ -1,0 +1,175 @@
+----------------   SPLIT_ID:  1 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split1_ftM_sl96_ll48_pl96_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed41  
+Validation results --- Loss: 1.06893, Accuracy: 0.67500, Precision: 0.59487, Recall: 0.56727, F1: 0.56667, AUROC: 0.69964, AUPRC: 0.64324
+Test results --- Loss: 1.28712, Accuracy: 0.61654, Precision: 0.51857, Recall: 0.51465, F1: 0.51008, AUROC: 0.49032, AUPRC: 0.50672
+
+
+----------------   SPLIT_ID:  1 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split1_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed42  
+Validation results --- Loss: 1.18891, Accuracy: 0.65000, Precision: 0.56303, Recall: 0.54909, F1: 0.54802, AUROC: 0.65091, AUPRC: 0.61047
+Test results --- Loss: 1.27234, Accuracy: 0.58647, Precision: 0.47447, Recall: 0.47985, F1: 0.47165, AUROC: 0.52145, AUPRC: 0.53929
+
+
+----------------   SPLIT_ID:  1 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split1_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed43  
+Validation results --- Loss: 1.19929, Accuracy: 0.66250, Precision: 0.55000, Recall: 0.52545, F1: 0.50629, AUROC: 0.65091, AUPRC: 0.61315
+Test results --- Loss: 1.33410, Accuracy: 0.66165, Precision: 0.57648, Recall: 0.55403, F1: 0.55111, AUROC: 0.51099, AUPRC: 0.51820
+
+
+----------------   SPLIT_ID:  1 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split1_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed44  
+Validation results --- Loss: 0.85178, Accuracy: 0.68750, Precision: 0.61364, Recall: 0.57636, F1: 0.57618, AUROC: 0.72800, AUPRC: 0.68125
+Test results --- Loss: 1.10273, Accuracy: 0.61654, Precision: 0.51857, Recall: 0.51465, F1: 0.51008, AUROC: 0.47331, AUPRC: 0.49937
+
+
+----------------   SPLIT_ID:  1 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split1_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed45  
+Validation results --- Loss: 0.91500, Accuracy: 0.67500, Precision: 0.57433, Recall: 0.53455, F1: 0.51447, AUROC: 0.71055, AUPRC: 0.65700
+Test results --- Loss: 1.13450, Accuracy: 0.61654, Precision: 0.46930, Recall: 0.48260, F1: 0.45758, AUROC: 0.47357, AUPRC: 0.48792
+
+
+----------------   SPLIT_ID:  2 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split2_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed41  
+Validation results --- Loss: 1.26081, Accuracy: 0.65000, Precision: 0.48532, Recall: 0.49455, F1: 0.45312, AUROC: 0.51127, AUPRC: 0.51960
+Test results --- Loss: 1.15218, Accuracy: 0.66165, Precision: 0.53814, Recall: 0.51557, F1: 0.48427, AUROC: 0.59707, AUPRC: 0.57967
+
+
+----------------   SPLIT_ID:  2 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split2_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed42  
+Validation results --- Loss: 1.28308, Accuracy: 0.58750, Precision: 0.47760, Recall: 0.48182, F1: 0.47525, AUROC: 0.49309, AUPRC: 0.52194
+Test results --- Loss: 1.14409, Accuracy: 0.65414, Precision: 0.56668, Recall: 0.54853, F1: 0.54560, AUROC: 0.60570, AUPRC: 0.58720
+
+
+----------------   SPLIT_ID:  2 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split2_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed43  
+Validation results --- Loss: 1.42011, Accuracy: 0.61250, Precision: 0.55342, Recall: 0.55455, F1: 0.55388, AUROC: 0.52800, AUPRC: 0.54193
+Test results --- Loss: 1.30942, Accuracy: 0.63158, Precision: 0.58486, Recall: 0.58974, F1: 0.58630, AUROC: 0.61408, AUPRC: 0.59396
+
+
+----------------   SPLIT_ID:  2 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split2_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed44  
+Validation results --- Loss: 1.06611, Accuracy: 0.63750, Precision: 0.49286, Recall: 0.49636, F1: 0.46971, AUROC: 0.54909, AUPRC: 0.53540
+Test results --- Loss: 0.98561, Accuracy: 0.65414, Precision: 0.56154, Recall: 0.54212, F1: 0.53652, AUROC: 0.62323, AUPRC: 0.60441
+
+
+----------------   SPLIT_ID:  2 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split2_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed45  
+Validation results --- Loss: 1.12248, Accuracy: 0.63750, Precision: 0.49286, Recall: 0.49636, F1: 0.46971, AUROC: 0.46909, AUPRC: 0.49823
+Test results --- Loss: 0.96037, Accuracy: 0.64662, Precision: 0.49551, Recall: 0.49817, F1: 0.46135, AUROC: 0.61277, AUPRC: 0.57663
+
+
+----------------   SPLIT_ID:  3 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split3_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed41  
+Validation results --- Loss: 1.01816, Accuracy: 0.66250, Precision: 0.59167, Recall: 0.58000, F1: 0.58261, AUROC: 0.57745, AUPRC: 0.58774
+Test results --- Loss: 1.12120, Accuracy: 0.60150, Precision: 0.51167, Recall: 0.51007, F1: 0.50792, AUROC: 0.54082, AUPRC: 0.52701
+
+
+----------------   SPLIT_ID:  3 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split3_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed42  
+Validation results --- Loss: 1.03283, Accuracy: 0.67500, Precision: 0.56360, Recall: 0.52364, F1: 0.49219, AUROC: 0.59782, AUPRC: 0.58124
+Test results --- Loss: 1.08162, Accuracy: 0.66165, Precision: 0.52608, Recall: 0.50916, F1: 0.46984, AUROC: 0.55678, AUPRC: 0.55628
+
+
+----------------   SPLIT_ID:  3 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split3_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed43  
+Validation results --- Loss: 1.20929, Accuracy: 0.65000, Precision: 0.51174, Recall: 0.50545, F1: 0.47712, AUROC: 0.56073, AUPRC: 0.55937
+Test results --- Loss: 1.27186, Accuracy: 0.65414, Precision: 0.54227, Recall: 0.52289, F1: 0.50502, AUROC: 0.56907, AUPRC: 0.54644
+
+
+----------------   SPLIT_ID:  3 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split3_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed44  
+Validation results --- Loss: 1.13145, Accuracy: 0.67500, Precision: 0.58235, Recall: 0.54545, F1: 0.53405, AUROC: 0.56291, AUPRC: 0.56356
+Test results --- Loss: 1.16843, Accuracy: 0.65414, Precision: 0.54956, Recall: 0.52930, F1: 0.51629, AUROC: 0.56907, AUPRC: 0.55701
+
+
+----------------   SPLIT_ID:  3 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split3_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed45  
+Validation results --- Loss: 1.06299, Accuracy: 0.60000, Precision: 0.48833, Recall: 0.49091, F1: 0.48345, AUROC: 0.51636, AUPRC: 0.54250
+Test results --- Loss: 1.10638, Accuracy: 0.60150, Precision: 0.47796, Recall: 0.48443, F1: 0.47131, AUROC: 0.52878, AUPRC: 0.52459
+
+
+----------------   SPLIT_ID:  4 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split4_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed41  
+Validation results --- Loss: 1.27915, Accuracy: 0.61250, Precision: 0.51344, Recall: 0.51091, F1: 0.50706, AUROC: 0.51564, AUPRC: 0.51821
+Test results --- Loss: 1.22582, Accuracy: 0.64662, Precision: 0.53070, Recall: 0.51740, F1: 0.50012, AUROC: 0.54343, AUPRC: 0.53539
+
+
+----------------   SPLIT_ID:  4 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split4_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed42  
+Validation results --- Loss: 1.19405, Accuracy: 0.65000, Precision: 0.55385, Recall: 0.53818, F1: 0.53333, AUROC: 0.48509, AUPRC: 0.50489
+Test results --- Loss: 1.16159, Accuracy: 0.61654, Precision: 0.43475, Recall: 0.46978, F1: 0.43062, AUROC: 0.50628, AUPRC: 0.49813
+
+
+----------------   SPLIT_ID:  4 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split4_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed43  
+Validation results --- Loss: 1.31393, Accuracy: 0.63750, Precision: 0.54928, Recall: 0.54000, F1: 0.53886, AUROC: 0.49964, AUPRC: 0.51582
+Test results --- Loss: 1.33662, Accuracy: 0.59398, Precision: 0.44697, Recall: 0.46612, F1: 0.44446, AUROC: 0.49267, AUPRC: 0.49201
+
+
+----------------   SPLIT_ID:  4 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split4_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed44  
+Validation results --- Loss: 1.26940, Accuracy: 0.66250, Precision: 0.55000, Recall: 0.52545, F1: 0.50629, AUROC: 0.50109, AUPRC: 0.51895
+Test results --- Loss: 1.23737, Accuracy: 0.65414, Precision: 0.46500, Recall: 0.49084, F1: 0.43352, AUROC: 0.51465, AUPRC: 0.51670
+
+
+----------------   SPLIT_ID:  4 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split4_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed45  
+Validation results --- Loss: 1.34895, Accuracy: 0.66250, Precision: 0.57035, Recall: 0.54727, F1: 0.54228, AUROC: 0.48218, AUPRC: 0.50702
+Test results --- Loss: 1.35256, Accuracy: 0.63158, Precision: 0.47232, Recall: 0.48718, F1: 0.45295, AUROC: 0.51701, AUPRC: 0.51716
+
+
+----------------   SPLIT_ID:  5 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split5_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed41  
+Validation results --- Loss: 1.05244, Accuracy: 0.63750, Precision: 0.46528, Recall: 0.48545, F1: 0.44643, AUROC: 0.58327, AUPRC: 0.56198
+Test results --- Loss: 1.04798, Accuracy: 0.66165, Precision: 0.48413, Recall: 0.49634, F1: 0.43713, AUROC: 0.58346, AUPRC: 0.55851
+
+
+----------------   SPLIT_ID:  5 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split5_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed42  
+Validation results --- Loss: 1.19870, Accuracy: 0.62500, Precision: 0.44914, Recall: 0.47636, F1: 0.43978, AUROC: 0.58182, AUPRC: 0.56465
+Test results --- Loss: 1.16681, Accuracy: 0.62406, Precision: 0.44328, Recall: 0.47527, F1: 0.43452, AUROC: 0.55730, AUPRC: 0.54878
+
+
+----------------   SPLIT_ID:  5 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split5_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed43  
+Validation results --- Loss: 1.06737, Accuracy: 0.60000, Precision: 0.32877, Recall: 0.43636, F1: 0.37500, AUROC: 0.54909, AUPRC: 0.54675
+Test results --- Loss: 1.00783, Accuracy: 0.66165, Precision: 0.43984, Recall: 0.48993, F1: 0.41854, AUROC: 0.54945, AUPRC: 0.54398
+
+
+----------------   SPLIT_ID:  5 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split5_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed44  
+Validation results --- Loss: 1.12071, Accuracy: 0.61250, Precision: 0.48377, Recall: 0.48909, F1: 0.47446, AUROC: 0.58255, AUPRC: 0.56771
+Test results --- Loss: 1.10327, Accuracy: 0.63158, Precision: 0.50000, Recall: 0.50000, F1: 0.47885, AUROC: 0.56436, AUPRC: 0.56166
+
+
+----------------   SPLIT_ID:  5 -----------------------
+
+classification_AMP-SCZ_TRF_Attn_Transformer_AMP-SCZ_split5_ftM_sl256_ll48_pl0_dm128_nh8_el6_dl1_df256_fc1_ebtimeF_dtTrue_Exp_seed45  
+Validation results --- Loss: 0.98911, Accuracy: 0.63750, Precision: 0.42117, Recall: 0.47455, F1: 0.41985, AUROC: 0.54909, AUPRC: 0.55146
+Test results --- Loss: 0.91950, Accuracy: 0.66917, Precision: 0.50919, Recall: 0.50183, F1: 0.44075, AUROC: 0.59785, AUPRC: 0.57608
+
+
