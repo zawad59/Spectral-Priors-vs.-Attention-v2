@@ -1,27 +1,6 @@
 #!/usr/bin/env python3
 """
-Null baseline for Table 2: KL divergence from each OBSERVED attention row
-to the uniform distribution 1/T.
 
-This is the "how spread-out is attention, period" reference scale --
-independent of the Cor/Inc distinction entirely. It answers a different
-question than KL(Cor||Cor)/KL(Inc||Inc) (how much do same-group subjects'
-attention patterns differ from EACH OTHER): here we ask how far a single
-row's attention pattern sits from maximally-uninformative (flat) attention.
-Reported alongside the within-group and cross-group KL values in Table 2
-so a reader can judge whether those values are "small" in absolute terms.
-
-Input: attn_rows_{correct,incorrect}_seed{X}_split{Y}.csv, one row per
-(subject, head, query), with metadata columns (subj_id, y_true, y_pred,
-correct, head, q) followed by key columns (k0..k{T-1}) that sum to ~1
-across each row. T is inferred from the number of k* columns actually
-present in each file -- not hardcoded -- so this works whether a file's
-attention rows include or exclude a CLS key column.
-
-Output: one companion CSV per input file (metadata columns + a new
-KL_to_uniform column, one value per row), plus a single combined long CSV
-across all files (with seed/split/group columns parsed from the filename)
-for convenient pooling into Table 2.
 """
 import argparse
 import re
