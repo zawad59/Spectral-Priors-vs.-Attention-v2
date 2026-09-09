@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # adftd_features_from_derivatives.py
+#Calculation of Spectral Features
 
 from __future__ import annotations
 import argparse
