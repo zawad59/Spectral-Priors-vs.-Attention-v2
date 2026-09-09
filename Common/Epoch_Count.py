@@ -1,28 +1,6 @@
 #!/usr/bin/env python3
 # SCZ_EpochCount_only.py
 #
-# Stripped-down version of SCZ_PreProcessing_ADFTD_aggregated.py that ONLY
-# counts epochs per subject -- no FFT/DWT/spectral feature computation.
-# Same file discovery, raw loading, channel picking, and linear-interpolation
-# resampling + sliding-window epoching as the full script, so n_epochs counts
-# match exactly what the full script would report.
-#
-#   - read raw EEG directly from .vhdr/.eeg/.vmrk (or .edf/.set/.fif) files
-#   - resample native_fs -> target_fs (default 256 Hz) via LINEAR
-#     INTERPOLATION (matching TDBrain_fft_dwt.py's resampling())
-#   - pick EEG channels, average reference
-#   - segment into sliding-window epochs (default 4s window, 2s stride --
-#     50% overlap)
-#   - sum n_epochs across multiple runs/files per subject when present
-#   - print n_epochs right next to subj_ID as each subject is processed
-#   - print the n_epochs-per-subject distribution (mean/median/min/max/std)
-#   - write one CSV row per subject: subj_ID, n_epochs, n_files_used
-#
-# Example:
-#   python SCZ_EpochCount_only.py \
-#       --root "Z:/AMP_SCZ_R3/EEG3/EC_EEG_Separate/Eyes_Closed_visit1_only" \
-#       --out "AMP_SCZ_visit1_EC_n_epochs.csv" \
-#       --win-sec 4.0 --stride-sec 2.0
 
 from __future__ import annotations
 
