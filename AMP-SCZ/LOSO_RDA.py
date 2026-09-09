@@ -1,64 +1,6 @@
 #!/usr/bin/env python3
 """
-Site-leakage control check: can the spectral features predict SITE rather
-than diagnosis? If not (near-chance performance), that's evidence the
-spectral features don't carry a site signature that could confound the
-diagnosis classifier.
-
-Reuses RDA_Test.py's exact classifier configuration:
-  - RegularizedDiscriminantAnalysis(alpha, gamma, priors) -- the from-scratch
-    two-knob Regularized Discriminant Analysis (Friedman, 1989) implementation
-    from RDA_Test.py (sklearn has no built-in RDA):
-        Sigma_c(alpha)        = (1-alpha)*S_c + alpha*S_pooled
-        Sigma_c(alpha, gamma) = (1-gamma)*Sigma_c(alpha) + gamma*(tr(Sigma_c(alpha))/p)*I
-    alpha=1 -> LDA (pooled covariance), alpha=0 -> QDA (per-class covariance);
-    gamma shrinks toward a scaled identity for numerical stability.
-  - prior_mode swept over ["uniform", "balanced"] (same PRIOR_MODES list),
-    jointly grid-searched with alpha (ALPHA_GRID) and gamma (GAMMA_GRID),
-    selected by inner-CV macro-F1 -- identical selection rule and identical
-    default grids to RDA_Test.py:
-        ALPHA_GRID = [0.1, 0.3, 0.5, 0.7, 0.9, 1.0]
-        GAMMA_GRID = [0.0, 0.05, 0.1, 0.2, 0.4]
-  - same 5 seeds [41, 42, 43, 44, 45], same cv_folds default of 5 for AMP-SCZ
-    (RDA_Test.py's comment: "AMP-SCZ has hundreds of subjects per split ...
-    the default 5-fold CV ... is appropriate here")
-  - same clean_train_apply pipeline (median imputation, near-zero-variance
-    filtering, StandardScaler fit on train only)
-  - same per-seed / per-split / ensemble aggregation and mean+-std reporting
-
-Adapted for this task (unchanged from the LDA version of this script):
-  - LABEL = site, parsed from the alphabetic prefix of subj_ID (e.g.
-    "BI07844" -> site "BI"), not the Group (HC/CHR) column.
-  - Metrics generalized from binary to multiclass (macro precision/recall/F1
-    unchanged in form; AUROC now uses multi_class="ovr"; AUPRC's one-hot +
-    average="macro" computation was already multiclass-general in
-    RDA_Test.py's metrics_6, so it's unchanged in form here).
-  - This input file is already ONE ROW PER SUBJECT (globally-averaged
-    spectral features, no windows), so there is no window subsampling step
-    and no subject-level probability aggregation step (RDA_Test.py's
-    aggregate_subject_probs is not needed here), and no train/val/test split
-    files to read -- this script generates its own stratified train/test
-    splits directly from the single input CSV, with the same 80/20 split
-    ratio the paper's methodology uses elsewhere.
-  - Sites are no longer dropped by default (--min_site_n=1 keeps every site
-    and every subject). --cv_folds defaults to 5 (matching RDA_Test.py's
-    AMP-SCZ default), but the smallest possible site (n=2 subjects total)
-    may still not survive every fold after the outer 80/20 split -- this is
-    expected, handled gracefully (see the deliberate deviation from
-    RDA_Test.py's fold-skip rule, noted at cv_score below), and is not a
-    crash.
-  - DEVIATION FROM RDA_Test.py's cv_score: RDA_Test.py requires ALL
-    N_CLASSES (there, just HC/CHR) to be present in a training fold before
-    fitting -- reasonable for a fixed 2-class problem. Here, n_classes is
-    the number of AMP-SCZ *sites* (dozens), and many sites have very few
-    subjects, so requiring every site to appear in every fold would discard
-    nearly all folds. This script keeps the original site-leakage script's
-    more tolerant rule (fit as long as >=2 classes are present in the
-    training fold; metrics_multiclass already handles a class being absent
-    from y_true by restricting AUROC/AUPRC to the classes actually present
-    -- see metrics_multiclass below). The classifier itself
-    (RegularizedDiscriminantAnalysis), its alpha/gamma grid, and the
-    prior_mode sweep are otherwise identical to RDA_Test.py.
+# Site Leakage Test
 
 Usage:
     python predict_site_from_spectral_rda.py \
