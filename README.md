@@ -9,7 +9,7 @@ Traverse to each dataset folder and run their spectral feature extraction (FFT D
 
 Along with [Medformer](https://github.com/DL4mHealth/Medformer), [TeCh](https://github.com/Levi-Ackman/TeCh) and [Reformer](https://github.com/google/trax/tree/master/trax/models/reformer), we have integrated [EEG-Conformer](https://github.com/eeyhsong/EEG-Conformer) model for our evaluation on the rest-EEG datasets. AMP-SCZ Loader class and data dictionary is updated in the **script:** `Transformer_Changes/data_provider/data_factory.py`.  For evaluating Conformer models' performances on the AMP-SCZ dataset, the following configuration was used:
 
-`python -u run.py --task_name classification --is_training 1 --root_path ./dataset/AMP-SCZ --model_id AMP-SCZ_Conformer --model Conformer --data AMP-SCZ --e_layers 6 --batch_size 32 --d_model 128 --d_ff 256 --swa --des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 100 --patience 10 --use_gpu True --dropout 0.15 --weight_decay 1e-2`
+`python -u run.py --task_name classification --is_training 1 --root_path ./dataset/AMP-SCZ --model_id AMP-SCZ_Conformer --model Conformer --data AMP-SCZ --e_layers 6 --batch_size 32 --d_model 128 --d_ff 256 --swa --des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 100 --patience 10 --use_gpu True --dropout 0.15 --weight_decay 1e-2 --stratified_splits_dir stratified_holdout_splits --run_all_splits --num_workers 8`
 
 **Transformer-Evaluation and Utils:** For evaluation of Transformer models, the `--is_training` param should be set to 0 keeping the same params used for training. For generating the attention scores, `--output_attention` param should be included with other input params. Attention map computations are performed in the `exp/exp_classification.py` and `utils/vis_attn.py`.
 
