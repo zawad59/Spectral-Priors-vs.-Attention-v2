@@ -1,38 +1,4 @@
 #!/usr/bin/env python3
-# SCZ_PreProcessing_ADFTD_aggregated.py
-#
-# AMP-SCZ raw BrainVision preprocessing, windowing/feature style now matched
-# EXACTLY to tdbrain_features_from_csv.py's non-overlapping-window approach:
-#   - read raw EEG directly from .vhdr/.eeg/.vmrk BrainVision files
-#   - resample to 256 Hz
-#   - pick EEG channels, average reference
-#   - split the continuous recording into non-overlapping --win-sec windows
-#     (default 1.0s) -- NOT one feature vector over the whole recording
-#   - per window: DC-detrend, then FFT relative band powers, DWT relative
-#     band energies, and spectral summary features (features_for_epoch,
-#     ported verbatim from tdbrain_features_from_csv.py)
-#   - average per-window features across all windows for one subject-file
-#     feature row, then average again across multiple files/runs per
-#     subject when present
-#   - write one CSV row per SCZ subject: subj_ID + feature columns only
-#     (no n_files_used/source_files bookkeeping columns, matching the
-#     ADFTD/APAVA/TDBrain scripts)
-#   - parallelized across subjects via --n_jobs (ProcessPoolExecutor):
-#     with 661 AMP-SCZ subjects, this is where wall-clock actually matters
-#
-# Expected AMP-SCZ layout from the provided snapshot:
-#   Eyes_Closed_visit1_only/
-#       BIO7844/
-#           visit_1/
-#               sub-BIO7844_ses-20230519_task-RestEC_run-01_eeg.vhdr
-#               sub-BIO7844_ses-20230519_task-RestEC_run-01_eeg.eeg
-#               sub-BIO7844_ses-20230519_task-RestEC_run-01_eeg.vmrk
-#
-# Example:
-#   python SCZ_PreProcessing_ADFTD_aggregated.py \
-#       --root "Z:/AMP_SCZ_R3/EEG3/EC_EEG_Separate/Eyes_Closed_visit1_only" \
-#       --out "AMP_SCZ_visit1_EC_ADFTD_aggregated_features.csv" \
-#       --n_jobs 8
 
 from __future__ import annotations
 
