@@ -79,9 +79,8 @@ dataset-specific `seq_len`, `enc_in`, and `patch_len` configs.
 Steps to reproduce Table 2:
 
 1. Run Medformer with the dataset-specific configs in
-   `Transformer_Changes/scripts/Medformer.sh` (ADHD uses the basic config
-   from its own repo) and `--output_attention` set. This generates a
-   folder such as `ADHD_Medformer_RAW_ATTN_Sc` containing correct/incorrect
+   `Transformer_Changes/scripts/Medformer.sh and `--output_attention` set. This generates a
+   folder such as `Attn_Weights_Medformer` containing correct/incorrect
    attention weights (query and key vectors, 64 patches) as two CSVs.
 2. Run `KL_Divergence/kl_raw_pairs.py` on the two CSVs to produce
    `kl_raw_by_head_query_pairs.csv`.
