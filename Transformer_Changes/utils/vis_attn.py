@@ -113,11 +113,6 @@ def _select_last_layer_attention_from_return(
 ) -> Optional[torch.Tensor]:
     """Pick the *last-layer* attention only (no averaging over layers/heads).
 
-    Returns: (B,H,N,N) or None.
-
-    NOTE: We don't know the model's internal layer ordering, so we use a practical
-    heuristic: extract all attention tensors in the returned structure, convert to
-    (B,H,N,N), choose an N (preferred or closest), then pick the *last occurrence*.
     """
 
     if attns_any is None:
