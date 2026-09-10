@@ -1,42 +1,7 @@
 #!/usr/bin/env python3
 # adftd_features_from_derivatives.py
 #
-# Same FFT/DWT/spectral-summary feature extraction as the raw-npy version,
-# but reads directly from a BIDS-style derivatives directory of raw
-# EEGLAB .set files instead of precomputed feature_XX.npy epoch arrays:
-#
-#   <root>/sub-001/eeg/sub-001_task-eyesclosed_eeg.set
-#   <root>/sub-002/eeg/sub-002_task-eyesclosed_eeg.set
-#   ...
-#
-# Each subject's continuous recording is loaded with MNE, split into
-# non-overlapping windows (--win-sec, default 1.0s), and the same
-# per-window feature extraction used elsewhere in this project is run on
-# each window, then averaged across windows for a per-subject feature row.
-#
-# ASSUMPTIONS -- VERIFY BEFORE TRUSTING THE OUTPUT:
-#
-#   1. SAMPLING RATE: read from each file's own MNE info (raw.info['sfreq']),
-#      NOT hardcoded. If --fs is passed explicitly, it overrides and the
-#      data is resampled to it; otherwise each subject uses its own native
-#      rate (printed per file so a mismatch across subjects is visible).
-#
-#   2. TASK FILE SELECTION: if a sub-XXX/eeg/ folder contains more than one
-#      .set file, --task (default "eyesclosed") is used to pick the match
-#      via substring search on the filename. If none match, the file is
-#      skipped with a warning -- check the printed selection before trusting
-#      the output.
-#
-#   3. SUBJECT-ID / LABEL ALIGNMENT: sub-XXX folders are assumed to align
-#      row-for-row, in numeric sub-ID order, with label.npy's rows
-#      (sub-001 <-> row 0, sub-002 <-> row 1, ...) -- same row-order
-#      assumption as the feature_XX.npy version, since folder numbers are
-#      sequential BIDS indices, not necessarily the real subj_ID values
-#      stored in label.npy. A [VERIFY] preview is printed before writing
-#      output -- check it against what you know about this dataset's
-#      folder <-> subj_ID mapping before trusting the CSV. If you have a
-#      participants file that maps sub-XXX to real subj_ID, match on that
-#      instead (flagged as a TODO below).
+
 
 from __future__ import annotations
 import argparse
