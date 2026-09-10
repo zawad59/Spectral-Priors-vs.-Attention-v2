@@ -1,27 +1,147 @@
-# Spectral-Priors-vs.-Attention-v2
-This is our code base for Spectral Priors vs Attention: Investigating the Utility of Attention Mechanisms in EEG-Based Diagnosis paper. All the pre-processing scripts, ML Baselines, KL Divergence, CRT Ablation, Conversion of Tensors, Transformer Models' data loading, data factory changes are uploaded to their respective folders.
+# Spectral Priors vs. Attention — Code Base (v2)
 
+Code base for **"Spectral Priors vs. Attention: Investigating the Utility of
+Attention Mechanisms in EEG-Based Diagnosis."** This repo contains all
+pre-processing scripts, ML baselines, Transformer model changes, the
+KL-Divergence and CRT ablation analyses, and the tensor-decomposition
+(SBD/RBD) sensitivity experiments reported in the paper.
 
-**Original Datasets:** [ADFTD](https://openneuro.org/datasets/ds004504/versions/1.0.6/), [APAVA](https://osf.io/jbysn/overview/), [TDBrain](https://brainclinics.com/resources/), [AMP-SCZ](https://nda.nih.gov/ampscz)
- 
+## Repository map
 
-Navigate to each dataset folder and run their spectral feature extraction (FFT DWT) script by downloading the original dataset folder and filtering subjects as mentioned in the paper. Upon Spectral Feature Computation, the stratified split generation script would generate the 5 splits with train-val-test subjects. Then passing the stratified_holdout_directory as the model param for LDA/RDA would start the train-test process of ML models. The data loader script for Transformer models **script:** `Transformer_Changes/data_provider/data_loader.py` has been modified for the AMP-SCZ and TDBrain class. Parameters integrated for running Attention models on N stratified splits with parallel processing, and generating attention weights are contained in `Transformer_Changes/run.py`.
+| Folder | Contents |
+|---|---|
+| `ADFTD/`, `APAVA/`, `TDBrain/`, `AMP-SCZ/` | Per-dataset spectral feature extraction (FFT/DWT) scripts and ML baselines (LDA/RDA) |
+| `Common/` | Dataset-agnostic utilities: stratified split generation, epoch counting, SBD/RBD tensor-dimension scripts |
+| `Transformer_Changes/` | Modified data loaders, models (Medformer, Reformer, Conformer, Transformer), training/eval entry point (`run.py`), CRT ablation results, and a separate `TeCh/` subtree |
+| `KL_Divergence/` | Post-hoc KL-divergence analysis over extracted attention weights |
+| `Timing_Analysis/` | Runtime-analysis variants of the Medformer/TeCh training scripts, plus per-dataset spectral-pipeline timing |
 
-Along with [Medformer](https://github.com/DL4mHealth/Medformer), [TeCh](https://github.com/Levi-Ackman/TeCh) and [Reformer](https://github.com/google/trax/tree/master/trax/models/reformer), we have integrated [EEG-Conformer](https://github.com/eeyhsong/EEG-Conformer) model for our evaluation on the rest-EEG datasets. AMP-SCZ Loader class and data dictionary is updated in the **script:** `Transformer_Changes/data_provider/data_factory.py`.  For evaluating Conformer models' performances on the AMP-SCZ dataset, the following configuration was used:
+## Setup
 
-`python -u run.py --task_name classification --is_training 1 --root_path ./dataset/AMP-SCZ --model_id AMP-SCZ_Conformer --model Conformer --data AMP-SCZ --e_layers 6 --batch_size 32 --d_model 128 --d_ff 256 --swa --des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 100 --patience 10 --use_gpu True --dropout 0.15 --weight_decay 1e-2 --stratified_splits_dir stratified_holdout_splits --run_all_splits --num_workers 8`
+> No `requirements.txt` is currently included in this repo — add one before
+> distributing, or list the minimum dependencies here (PyTorch, NumPy,
+> SciPy, scikit-learn, matplotlib, pandas). Fill in Python/CUDA versions
+> once pinned.
 
-**Transformer-Evaluation and Utils:** For evaluation of Transformer models, the `--is_training` param should be set to 0 keeping the same params used for training. For generating the attention scores, `--output_attention` param should be included with other input params. Attention map computations are performed in the `exp/exp_classification.py` and `utils/vis_attn.py`.
+```bash
+git clone <repo-url>
+cd CODEBASE_ML4H
+pip install -r requirements.txt   # TODO: add this file
+```
 
-**KL-Divergence Analysis of Medformer:** We extract the window-averaged, last-layer, all-head query-key attention matrix for each subject, and compute the KL divergence independently for every (head, query) row between all correct-incorrect subject pairs within each split. After removing the CLS key, the attention matrix size is 64×64 for ADFTD and APAVA, and 32×32 for TDBrain and AMP-SCZ, reflecting `Medformer's` dataset-specific seq_len, enc_in, and patch_len configurations. We obtain these matrices by running the Medformer evaluation script and passing `output_attention` as a param.
+Each dataset script expects the raw dataset downloaded into its own folder
+(see links below) before running the pipeline.
 
-For the KL-Divergence scores in table 2 of the paper, the same configuration of Medformer model was run with dataset specific params as laid out in the `scripts/Medformer.sh` file. For ADHD, we use the basic configuration provided in their repo. The `--output_attention` generates folders like `ADHD_Medformer_RAW_ATTN_Sc` where we have correct and incorrect attention weights for query and key vectors for 64 patches. It generates two csvs for correct predictions and incorrect predictions. We run the `KL_raw_pairs.py` on those two csvs resulting in `kl_raw_by_head_query_pairs.csv`. Finally, we compute the mean and standard deviation for all correct and incorrect pairs by running the `Calc_Grand_Mean_KL_raw.py` script.
+**Original datasets:** [ADFTD](https://openneuro.org/datasets/ds004504/versions/1.0.6/), [APAVA](https://osf.io/jbysn/overview/), [TDBrain](https://brainclinics.com/resources/), [AMP-SCZ](https://nda.nih.gov/ampscz)
 
-**CRT Ablation:** For ablating the Cross-token interaction, we keep our changes limited to `models/Transformer.py` in it's constructor and classification method where masking is applied to the off-diagonal attention weights. 
+## Pipeline
 
-**Sensitivity of Spectral Features:** To reproduce the results of section 3.3 with the Medformer model, run the **script:** `Common/increase_Tensor_Dim_SBD.py` with param `--flatten` with the `Feature` numpy directory downloaded. When a dataset feature directory is provided as input, the script would segregate the time-signals representing 5 frequency bands which would generate a modified tensor dimension. For Random Bands run the `Common/increase_Tensor_Dim_RBD.py`. We modify and upload the `data_provider/uea.py`, `layers/augmentation.py` and `layers/embed.py` for dimension handling of updated tensors. The `data_provider/data_loader.py` needs to be changed for attention models before running the `SBD-RBD` decomposition experiments. 
+Run in this order for any dataset:
 
-For runtime-analysis and results, navigate to `Timing_Analysis/Medformer/run.py` designed for Medformer runtime analysis. The same way -- `Timing_Analysis/TeCh/run.py` contains the runtime analysis modifications for TeCh.
+1. **Spectral feature extraction.** In the dataset's folder (e.g.
+   `ADFTD/adftd_ff_dwt_from_derivatives.py`, `APAVA/APAVA_fft_dwt.py`,
+   `TDBrain/TDBrain_fft_dwt.py`, `AMP-SCZ/AMP_SCZ_fft_dwt_PreProcessing.py`),
+   run the FFT/DWT script against the downloaded raw dataset, filtering
+   subjects as described in the paper.
+2. **Stratified split generation.** Run `Common/gen_Stratified_Sets.py` on
+   the extracted features to generate the 5 train/val/test stratified
+   splits (`stratified_holdout_splits/`).
+3. **ML baselines (LDA/RDA).** Pass the `stratified_holdout_splits`
+   directory as the model param to the per-dataset `LDA_Test.py` /
+   `RDA_Test.py` scripts to train/test the ML baselines.
+4. **Transformer models.** Use `Transformer_Changes/run.py` for
+   Medformer, Reformer, Conformer, and Transformer. The data loader
+   (`Transformer_Changes/data_provider/data_loader.py`) and data factory
+   (`Transformer_Changes/data_provider/data_factory.py`) have been
+   modified with AMP-SCZ and TDBrain classes. `run.py` supports running
+   across N stratified splits with parallel processing and generating
+   attention weights.
 
-For Appendix Results navigate to `Timing_Analysis/Spectral_Pipeline/{dataset}/` and run `timing.py` with required params -- that would generate the whole spectral pipeline with distributional statistics of number of windows per subject across datasets. For Within group KL-Div results: keep the csvs for correct-incorrect predictions of attention weights and run `kl_within_group.py` and `Calc_within_group_stat.py`. To generate the distribution from uniform KL: run `Div_from_Uniform.py`. 
+   Example — evaluating Conformer on AMP-SCZ:
+   ```bash
+   python -u run.py \
+     --task_name classification --is_training 1 \
+     --root_path ./dataset/AMP-SCZ --model_id AMP-SCZ_Conformer \
+     --model Conformer --data AMP-SCZ \
+     --e_layers 6 --batch_size 32 --d_model 128 --d_ff 256 --swa \
+     --des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 100 \
+     --patience 10 --use_gpu True --dropout 0.15 --weight_decay 1e-2 \
+     --stratified_splits_dir stratified_holdout_splits \
+     --run_all_splits --num_workers 8
+   ```
+   `TeCh` has its own separate copy of the training/eval scripts at
+   `Transformer_Changes/TeCh/run.py` and
+   `Transformer_Changes/TeCh/exp_classification.py`, with per-dataset
+   shell configs in `Transformer_Changes/TeCh/scripts/` (`ADFTD.sh`,
+   `APAVA.sh`, `TDBRAIN.sh`).
+5. **Evaluation / attention extraction.** Re-run `run.py` with
+   `--is_training 0`, keeping all other params identical to the training
+   run. Add `--output_attention` to generate attention maps. Attention-map
+   computation lives in `Transformer_Changes/exp/exp_classification.py`
+   and `Transformer_Changes/utils/vis_attn.py`.
+
+## KL-Divergence analysis (Medformer)
+
+We extract the window-averaged, last-layer, all-head query-key attention
+matrix per subject and compute the KL divergence independently for every
+(head, query) row between all correct/incorrect subject pairs within each
+split. After removing the CLS key, the attention matrix is 64×64 for ADFTD
+and APAVA, and 32×32 for TDBrain and AMP-SCZ — reflecting Medformer's
+dataset-specific `seq_len`, `enc_in`, and `patch_len` configs.
+
+Steps to reproduce Table 2:
+
+1. Run Medformer with the dataset-specific configs in
+   `Transformer_Changes/scripts/Medformer.sh` (ADHD uses the basic config
+   from its own repo) and `--output_attention` set. This generates a
+   folder such as `ADHD_Medformer_RAW_ATTN_Sc` containing correct/incorrect
+   attention weights (query and key vectors, 64 patches) as two CSVs.
+2. Run `KL_Divergence/kl_raw_pairs.py` on the two CSVs to produce
+   `kl_raw_by_head_query_pairs.csv`.
+3. Run `KL_Divergence/Calc_Grand_Mean_KL_raw.py` to compute the mean and
+   standard deviation across all correct/incorrect pairs.
+
+For within-group KL results: keep the correct/incorrect attention-weight
+CSVs and run `KL_Divergence/kl_within_group.py` and
+`KL_Divergence/Calc_within_group_stat.py`. For the distribution vs. a
+uniform KL baseline, run `KL_Divergence/Div_from_Uniform.py`.
+
+## CRT ablation
+
+To ablate cross-token interaction, changes are limited to
+`Transformer_Changes/models/Transformer.py` — masking is applied to the
+off-diagonal attention weights in the constructor and classification
+method. Pre-computed results are already in the repo:
+`Transformer_Changes/CRT Ablation/Transformer_With_Attention_Res_*.txt`,
+`Transformer_No_Attention_Res_*.txt`, and the summary figure
+`attention_ablation_comparison_combined.png`.
+
+## Sensitivity of spectral features (Section 3.3)
+
+To reproduce with Medformer:
+
+- **Structured bands (SBD):** run `Common/increase_Tensor_Dim_SBD.py
+  --flatten` against the downloaded `Feature` numpy directory. Given a
+  dataset feature directory, it segregates the time signals into 5
+  frequency bands, producing a modified tensor dimension.
+- **Random bands (RBD):** run `Common/increase_Tensor_Dim_RBD.py`
+  the same way.
+
+Before running either SBD/RBD experiment with attention models, update
+`Transformer_Changes/data_provider/data_loader.py` for the new tensor
+shape. `Transformer_Changes/data_provider/uea.py`,
+`Transformer_Changes/layers/Augmentation.py`, and
+`Transformer_Changes/layers/Embed.py` have already been modified to
+handle the updated tensor dimensions.
+
+## Runtime analysis (Appendix)
+
+- **Model runtime:** `Timing_Analysis/MedFormer/run.py` and
+  `Timing_Analysis/TeCh/run.py` are runtime-instrumented copies of the
+  respective training scripts; per-dataset timing CSVs are included
+  alongside each.
+- **Spectral pipeline runtime:** `Timing_Analysis/Spectral_Pipeline/{dataset}/timing.py`
+  generates the full spectral pipeline along with distributional
+  statistics on the number of windows per subject, for each dataset.
+
 
