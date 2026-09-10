@@ -131,11 +131,4 @@ handle the updated tensor dimensions.
   generates the full spectral pipeline along with distributional
   statistics on the number of windows per subject, for each dataset.
 
-## Notes for reviewers
 
-- Folder/file names are case-sensitive (e.g. `Timing_Analysis/MedFormer/`,
-  not `Medformer/`) — copy paths exactly as written above.
-- `Transformer_Changes/TeCh/` contains its own `run.py` /
-  `exp_classification.py`; it does not share the top-level
-  `Transformer_Changes/run.py` used by Medformer, Reformer, Conformer, and
-  Transformer.
