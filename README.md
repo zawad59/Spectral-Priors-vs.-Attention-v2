@@ -10,11 +10,11 @@ KL-Divergence and CRT ablation analyses, and the tensor-decomposition
 
 | Folder | Contents |
 |---|---|
-| `ADFTD/`, `APAVA/`, `TDBrain/`, `AMP-SCZ/` | Per-dataset spectral feature extraction (FFT/DWT) scripts and ML baselines (LDA/RDA) |
-| `Common/` | Dataset-agnostic utilities: stratified split generation, epoch counting, SBD/RBD tensor-dimension scripts |
-| `Transformer_Changes/` | Modified data loaders, models (Medformer, Reformer, Conformer, Transformer), training/eval entry point (`run.py`), CRT ablation results, and a separate `TeCh/` subtree |
-| `KL_Divergence/` | Post-hoc KL-divergence analysis over extracted attention weights |
-| `Timing_Analysis/` | Runtime-analysis variants of the Medformer/TeCh training scripts, plus per-dataset spectral-pipeline timing |
+| `ADFTD`, `APAVA`, `TDBrain`, `AMP-SCZ` | Per-dataset spectral feature extraction (FFT/DWT) scripts and ML baselines (LDA/RDA) |
+| `Common` | Dataset-agnostic utilities: stratified split generation, epoch counting, SBD/RBD tensor-dimension scripts |
+| `Transformer_Changes` | Modified data loaders, models (Medformer, Reformer, Conformer, Transformer), training/eval entry point (`run.py`), CRT ablation results, and a separate `TeCh/` subtree |
+| `KL_Divergence` | Post-hoc KL-divergence analysis over extracted attention weights |
+| `Timing_Analysis` | Runtime-analysis variants of the Medformer/TeCh training scripts, plus per-dataset spectral-pipeline timing |
 
 ## Setup
 
