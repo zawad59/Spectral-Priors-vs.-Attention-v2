@@ -61,9 +61,9 @@ Run in this order for any dataset:
    `Transformer_Changes/TeCh/exp_classification.py`, with per-dataset
    shell configs in `Transformer_Changes/TeCh/scripts/` (`ADFTD.sh`,
    `APAVA.sh`, `TDBRAIN.sh`).
-5. **Evaluation / attention extraction.** Re-run `run.py` with
+5. **Evaluation / attention-weight extraction.** Re-run `run.py` with
    `--is_training 0`, keeping all other params identical to the training
-   run. Add `--output_attention` to generate attention maps. Attention-map
+   run. Add `--output_attention` to generate attention weights. Attention-map
    computation lives in `Transformer_Changes/exp/exp_classification.py`
    and `Transformer_Changes/utils/vis_attn.py`.
 
