@@ -18,15 +18,10 @@ KL-Divergence and CRT ablation analyses, and the tensor-decomposition
 
 ## Setup
 
-> No `requirements.txt` is currently included in this repo — add one before
-> distributing, or list the minimum dependencies here (PyTorch, NumPy,
-> SciPy, scikit-learn, matplotlib, pandas). Fill in Python/CUDA versions
-> once pinned.
-
 ```bash
 git clone <repo-url>
 cd CODEBASE_ML4H
-pip install -r requirements.txt   # TODO: add this file
+pip install -r requirements.txt
 ```
 
 Each dataset script expects the raw dataset downloaded into its own folder
@@ -59,15 +54,7 @@ Run in this order for any dataset:
 
    Example — evaluating Conformer on AMP-SCZ:
    ```bash
-   python -u run.py \
-     --task_name classification --is_training 1 \
-     --root_path ./dataset/AMP-SCZ --model_id AMP-SCZ_Conformer \
-     --model Conformer --data AMP-SCZ \
-     --e_layers 6 --batch_size 32 --d_model 128 --d_ff 256 --swa \
-     --des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 100 \
-     --patience 10 --use_gpu True --dropout 0.15 --weight_decay 1e-2 \
-     --stratified_splits_dir stratified_holdout_splits \
-     --run_all_splits --num_workers 8
+   python -u run.py --task_name classification --is_training 1  --root_path ./dataset/AMP-SCZ --model_id AMP-SCZ_Conformer  --model Conformer --data AMP-SCZ  --e_layers 6 --batch_size 32 --d_model 128 --d_ff 256 --swa --des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 100 --patience 10 --use_gpu True --dropout 0.15 --weight_decay 1e-2 --stratified_splits_dir stratified_holdout_splits --run_all_splits --num_workers 8
    ```
    `TeCh` has its own separate copy of the training/eval scripts at
    `Transformer_Changes/TeCh/run.py` and
@@ -144,4 +131,11 @@ handle the updated tensor dimensions.
   generates the full spectral pipeline along with distributional
   statistics on the number of windows per subject, for each dataset.
 
+## Notes for reviewers
 
+- Folder/file names are case-sensitive (e.g. `Timing_Analysis/MedFormer/`,
+  not `Medformer/`) — copy paths exactly as written above.
+- `Transformer_Changes/TeCh/` contains its own `run.py` /
+  `exp_classification.py`; it does not share the top-level
+  `Transformer_Changes/run.py` used by Medformer, Reformer, Conformer, and
+  Transformer.
