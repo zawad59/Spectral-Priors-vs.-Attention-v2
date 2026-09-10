@@ -20,7 +20,7 @@ KL-Divergence and CRT ablation analyses, and the tensor-decomposition
 
 ```bash
 git clone <repo-url>
-cd CODEBASE_ML4H
+cd CODEBASE
 pip install -r requirements.txt
 ```
 
